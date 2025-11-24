@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pet Depot</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="manifest" href="petstore.webmanifest">
+        </head>
+                <script>
+            if ('serviceWorker' in navigator){
+                navigator.serviceWorker.register('serviceworker.js');
+            }
+        </script>
+    <body>
+        <div id="app">
+            <header>
+            <h1 v-text="sitename"></h1>
+            <button v-on:click="showCheckout">
+                {{cartItemCount}}
+            <span  class="fa-solid fa-cart-shopping"></span>Checkout
+            </button>
+            <h2 v-text="product.name"></h2>
+            <img v-bind:src="product.image">
+            <p v-html="product.description"></p>
+            <p>Price: {{product.price}}</p>
+            <button v-on:click="addToCart" v-if="canAddToCart">Add to Cart</button>
+            <button v-else disabled>Sold Out</button>
+            
+            </header>
+        </div>
+
+        <script type ="text/javascript">
+            let Webstore = new Vue({
+                el:'#app',
+                computed: {
+                    cartItemCount: function() {
+                        return this.cart.length ||"";
+                    },
+                    canAddToCart: function() {
+                        return this.product.availableInventory > this.cartItemCount;
+                    }
+                },
+                methods: {
+                    addToCart: function() {
+                        this.cart.push(this.product.id);
+                    },
+                    showCheckout: function() {
+                        this.showProduct=this.showProduct ? false : true;
+                    }
+                },
+                data:{
+                    sitename: 'Pet Depot',
+                    product:{
+                        id: 1,
+                        name: 'Cat Food 2kg bag',
+                        description: "A 25 pound bag of <em>irresistible</em>," + "organic goodness for your cat.",
+                        price: 10.99,
+                        image: "Images/cat.jpeg",
+                        availableInventory: 5,
+                        showProduct: true
+                    },
+                    cart:[]
+                }
+                
+            });
+        </script>
+</html>

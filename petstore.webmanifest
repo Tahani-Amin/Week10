@@ -1,0 +1,19 @@
+{
+    "name" : "My Pet Store PWA",
+    "origin" : "*",
+    "methods:" : "GET, HEAD, POST, PATCH, PUT, DELETE, OPTIONS",
+    "description": "My online post store",
+    "icons": [
+        {
+            "src" : "images/icon.png",
+            "sizes" : "512x512",
+            "type" : "image/png"
+
+        }
+    ],
+    "start_url": "PetDepot.html",
+    "display" : "fullscreen",
+    "background_color" : "#B12A34"
+    
+
+}
